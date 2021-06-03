@@ -17,7 +17,7 @@ class BlogList extends Component {
             <div className="card-content">
               <span className="card-title">{blog.title}</span>
 
-              <div dangerouslySetInnerHTML={{ __html: blog.content }} />
+              <p dangerouslySetInnerHTML={{ __html: blog.content }} />
             </div>
             <div className="card-action">
               <Link to={`/blogs/${blog._id}`}>Read</Link>
