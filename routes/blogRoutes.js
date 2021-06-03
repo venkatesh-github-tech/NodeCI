@@ -38,4 +38,30 @@ module.exports = (app) => {
       res.send(400, err);
     }
   });
+
+  app.put("/api/blogs", requireLogin, clearCache, async (req, res) => {
+    const { id, title, content, imageUrl } = req.body;
+
+    let blogRecord = await Blog.findOne({ _id: id });
+    if (!blogRecord) {
+      console.log("NOT FOUND......");
+      res.send(400, `Record with ${id} not found`);
+    }
+    try {
+      await Blog.updateOne(
+        { _id: id },
+        {
+          $set: {
+            title: title,
+            content: content,
+            imageUrl: imageUrl === null ? blogRecord.imageUrl : imageUrl,
+          },
+        }
+      );
+      blogRecord = await Blog.findOne({ _id: id });
+      res.send(blogRecord);
+    } catch (err) {
+      res.status(400).send(err);
+    }
+  });
 };

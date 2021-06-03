@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchBlog } from "../../actions";
+import { Link } from "react-router-dom";
 
 class BlogShow extends Component {
   componentDidMount() {
@@ -25,13 +26,24 @@ class BlogShow extends Component {
       return "";
     }
 
-    const { title, content } = this.props.blog;
+    const { title, content, _id } = this.props.blog;
 
     return (
       <div>
-        <h3>{title}</h3>
-        <p>{content}</p>
         {this.renderImage()}
+        <h3>{title}</h3>
+        <div dangerouslySetInnerHTML={{ __html: content }} />
+        <div className="fixed-action-btn">
+          <Link
+            to={{
+              pathname: `/blogs/edit/${_id}`,
+              state: { title: title, content: content, _id: _id },
+            }}
+            className="btn-floating btn-large red"
+          >
+            <i className="material-icons">edit</i>
+          </Link>
+        </div>
       </div>
     );
   }
