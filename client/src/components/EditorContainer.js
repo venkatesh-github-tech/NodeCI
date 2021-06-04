@@ -22,9 +22,37 @@ class EditorContainer extends React.Component {
   }
 
   onEditorStateChange = (editorState) => {
-    //console.log(editorState);
+    // console.info(
+    //   "new:",
+    //   convertToRaw(this.state.editorState.getCurrentContent())
+    // );
+    const content = editorState.getCurrentContent();
+    const isEditorEmpty = !content.hasText();
+    const currentPlainText = content.getPlainText();
+    const lengthOfEditorContent = currentPlainText.length;
+    const lengthOfTrimmedContent = currentPlainText.trim().length;
+    const isContainOnlySpaces = !isEditorEmpty && !lengthOfTrimmedContent;
+
+    console.clear();
+    console.log("editor empty => ", isEditorEmpty);
+    console.log("editor containe only spaces => ", isContainOnlySpaces);
+    console.log(
+      "editor containe some text (not only spaces) => ",
+      !!(!isEditorEmpty && lengthOfTrimmedContent)
+    );
+    console.log("editor length =>", lengthOfEditorContent);
+
+    //console.info("check for empty:", editorState.getCurrentContent().hasText());
+    let isContentExists = isEditorEmpty
+      ? false
+      : isContainOnlySpaces
+      ? false
+      : true;
+    console.log("isContentExists:", isContentExists);
     this.props.onRTEChange(
-      draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()))
+      isContentExists
+        ? draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()))
+        : ""
     );
     this.setState({
       editorState,
