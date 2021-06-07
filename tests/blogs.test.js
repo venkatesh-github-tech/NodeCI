@@ -19,7 +19,7 @@ describe("when logged in", () => {
   test("can see blog create form", async () => {
     await page.waitForSelector("form label");
     const label = await page.getContentsOf("form label");
-    expect(label).toEqual("Blog Title");
+    expect(label).toEqual("Blog Title *");
   });
 
   describe("And using invalid Input", () => {
@@ -28,24 +28,28 @@ describe("when logged in", () => {
     });
 
     test("the form shows the error message", async () => {
-      const errorTitle = await page.getContentsOf(".title .red-text");
-      const errorContent = await page.getContentsOf(".content .red-text");
-      expect(errorTitle).toEqual("You must provide a value");
-      expect(errorContent).toEqual("You must provide a value");
+      const errorTitle = await page.getContentsOf("#errTitle");
+      const errorContent = await page.getContentsOf("#errContent");
+      expect(errorTitle).toEqual("Blog title should not be empty");
+      expect(errorContent).toEqual("Blog content should not be empty");
     });
   });
 
   describe("And using valid input", () => {
     beforeEach(async () => {
       //get the textboxes selector && type some content
-      await page.type(".title input", "This is title for jest");
-      await page.type(".content input", "This is blog for jest");
-
-      //click next button
+      //await page.type(".title input", "This is title for jest");
+      await page.type("div input", "This is title for jest");
+      //await page.type(".content input", "This is blog for jest");
+      // const el = await page.getContentsOf(".editor-class");
+      // el.textConent = "This is blog for jest";
+      await page.click(".editor-class");
+      await page.type(".editor-class", "This is blog for jest");
       await page.click("form button");
     });
 
     test("submitting take the user to review screen", async () => {
+      //console.log(await page.getContentsOf("html"));
       const reviewButton = await page.getContentsOf("h5");
       expect(reviewButton).toEqual("Please confirm your entries");
     });
@@ -58,7 +62,7 @@ describe("when logged in", () => {
       const content = await page.getContentsOf("p");
 
       expect(title).toEqual("This is title for jest");
-      expect(content).toEqual("This is blog for jest");
+      expect(content.substring(3, 24)).toEqual("This is blog for jest");
     });
   });
 });
