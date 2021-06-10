@@ -1,7 +1,7 @@
 // BlogNew shows BlogForm and BlogFormReview
 import React, { Component } from "react";
-import BlogFormNew from "./BlogFormNew";
-import BlogFormReviewNew from "./BlogFormReviewNew";
+import BlogForm from "./BlogForm";
+import BlogFormReview from "./BlogFormReview";
 
 class BlogNew extends Component {
   state = { showFormReview: false, title: "", content: "" };
@@ -9,7 +9,7 @@ class BlogNew extends Component {
   renderContent() {
     if (this.state.showFormReview) {
       return (
-        <BlogFormReviewNew
+        <BlogFormReview
           onCancel={() => this.setState({ showFormReview: false })}
           title={this.state.title}
           content={this.state.content}
@@ -18,7 +18,7 @@ class BlogNew extends Component {
     }
 
     return (
-      <BlogFormNew
+      <BlogForm
         onBlogSubmit={(title, blogContent) =>
           this.setState({
             showFormReview: true,

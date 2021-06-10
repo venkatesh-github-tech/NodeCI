@@ -19,7 +19,10 @@ class BlogList extends Component {
 
               <p
                 dangerouslySetInnerHTML={{
-                  __html: blog.content.slice(0, 500) + "...",
+                  __html:
+                    blog.content.length > 500
+                      ? blog.content.slice(0, 500) + "..."
+                      : blog.content,
                 }}
               />
             </div>
