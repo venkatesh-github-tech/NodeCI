@@ -17,6 +17,8 @@ class BlogShow extends Component {
             this.props.blog.imageUrl
           }
           alt="Blogster"
+          width="100%"
+          height="450"
         />
       );
     }
@@ -26,7 +28,7 @@ class BlogShow extends Component {
       return "";
     }
 
-    const { title, content, _id } = this.props.blog;
+    const { title, content, _id, imageUrl } = this.props.blog;
 
     return (
       <div>
@@ -37,7 +39,12 @@ class BlogShow extends Component {
           <Link
             to={{
               pathname: `/blogs/edit/${_id}`,
-              state: { title: title, content: content, _id: _id },
+              state: {
+                title: title,
+                content: content,
+                _id: _id,
+                existingImage: imageUrl,
+              },
             }}
             className="btn-floating btn-large red"
           >

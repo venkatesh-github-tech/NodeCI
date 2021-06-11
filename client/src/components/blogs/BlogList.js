@@ -15,7 +15,7 @@ class BlogList extends Component {
         <div className="card darken-1 horizontal" key={blog._id}>
           <div className="card-stacked">
             <div className="card-content">
-              <span className="card-title">{blog.title}</span>
+              <h3>{blog.title}</h3>
 
               <p
                 dangerouslySetInnerHTML={{

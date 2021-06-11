@@ -10,6 +10,7 @@ class BlogEdit extends Component {
     id: null,
     title: "",
     blogContent: "",
+    existingImage: "",
     errors: { title: "", content: "" },
     editorTouched: false,
   };
@@ -45,6 +46,7 @@ class BlogEdit extends Component {
     this.setState({
       id: this.props.location.state._id,
       title: this.props.location.state.title,
+      existingImage: this.props.location.state.existingImage,
     });
   }
   renderButtons() {
@@ -107,6 +109,7 @@ class BlogEdit extends Component {
         id: this.state.id,
         content: blogContent,
         title: blogTitle,
+        existingImage: this.state.existingImage,
       };
       console.log("blog content:", formValues);
       updateBlog(formValues, this.state.file, history);

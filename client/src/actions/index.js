@@ -69,7 +69,12 @@ export const updateBlog = (values, file, history) => async (dispatch) => {
     ...values,
     imageUrl: uploadObject.data.key,
   });
-
+  if (values.existingImage) {
+    //delete image from AWS cloud
+    console.info(values.existingImage + " has to be deleted from AWS");
+    const deleteImageResponse = await axios.put("/api/deleteImage", values);
+    console.info("deleteImageResponse", deleteImageResponse);
+  }
   history.push("/blogs");
   dispatch({ type: FETCH_BLOG, payload: res.data });
 };

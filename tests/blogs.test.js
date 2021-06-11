@@ -58,7 +58,7 @@ describe("when logged in", () => {
       await page.click("button.green");
       await page.waitFor(".card");
 
-      const title = await page.getContentsOf(".card-title");
+      const title = await page.getContentsOf("h3");
       const content = await page.getContentsOf("p");
 
       expect(title).toEqual("This is title for jest");
