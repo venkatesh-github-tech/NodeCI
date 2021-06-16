@@ -41,6 +41,7 @@ class BlogList extends Component {
 }
 
 function mapStateToProps({ blogs }) {
+  //console.log(blogs);
   return { blogs };
 }
 

@@ -19,8 +19,8 @@ class BlogFormReviewNew extends Component {
   }
 
   renderButtons() {
-    const { onCancel, title, content } = this.props;
-    console.log(title, content);
+    const { onCancel } = this.props;
+    //console.log(title, content);
     return (
       <div>
         <button

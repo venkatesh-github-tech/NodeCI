@@ -47,7 +47,7 @@ class BlogFormNew extends Component {
     });
   }
   getEditorContent = (content) => {
-    console.log(content);
+    //console.log(content);
     this.setState({
       blogContent: content,
       editorTouched: true,
@@ -59,7 +59,7 @@ class BlogFormNew extends Component {
     let errorsState = this.state.errors;
     let blogContent = this.state.blogContent.trim();
     let blogTitle = this.state.title.trim();
-    console.log(blogTitle, blogContent);
+    //console.log(blogTitle, blogContent);
     errorsState.title =
       blogTitle === "" ? "Blog title should not be empty" : "";
     // Validation for blog content
@@ -77,13 +77,14 @@ class BlogFormNew extends Component {
       //console.info("this.state.blogContent", this.state.blogContent);
       //console.info("Valid form");
       this.props.onBlogSubmit(this.state.title, this.state.blogContent);
-    } else {
-      console.info("Blog content should not be empty!");
     }
+    // else {
+    //   console.info("Blog content should not be empty!");
+    // }
   }
 
   validateForm = (errors) => {
-    console.info("Error:", errors);
+    //console.info("Error:", errors);
     let valid = true;
     Object.values(errors).forEach((val) => val.length > 0 && (valid = false));
     return valid;

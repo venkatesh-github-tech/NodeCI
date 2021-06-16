@@ -29,18 +29,18 @@ class EditorContainer extends React.Component {
     const content = editorState.getCurrentContent();
     const isEditorEmpty = !content.hasText();
     const currentPlainText = content.getPlainText();
-    const lengthOfEditorContent = currentPlainText.length;
+    //const lengthOfEditorContent = currentPlainText.length;
     const lengthOfTrimmedContent = currentPlainText.trim().length;
     const isContainOnlySpaces = !isEditorEmpty && !lengthOfTrimmedContent;
 
-    console.clear();
-    console.log("editor empty => ", isEditorEmpty);
-    console.log("editor containe only spaces => ", isContainOnlySpaces);
-    console.log(
-      "editor containe some text (not only spaces) => ",
-      !!(!isEditorEmpty && lengthOfTrimmedContent)
-    );
-    console.log("editor length =>", lengthOfEditorContent);
+    //console.clear();
+    //console.log("editor empty => ", isEditorEmpty);
+    //console.log("editor containe only spaces => ", isContainOnlySpaces);
+    // console.log(
+    //   "editor containe some text (not only spaces) => ",
+    //   !!(!isEditorEmpty && lengthOfTrimmedContent)
+    // );
+    // console.log("editor length =>", lengthOfEditorContent);
 
     //console.info("check for empty:", editorState.getCurrentContent().hasText());
     let isContentExists = isEditorEmpty
@@ -48,7 +48,7 @@ class EditorContainer extends React.Component {
       : isContainOnlySpaces
       ? false
       : true;
-    console.log("isContentExists:", isContentExists);
+    //console.log("isContentExists:", isContentExists);
     this.props.onRTEChange(
       isContentExists
         ? draftToHtml(convertToRaw(this.state.editorState.getCurrentContent()))

@@ -4,10 +4,14 @@
   "private": true,
   "proxy": {
     "/auth/*": {
-      "target": "http://localhost:5000"
+      "target": "http://localhost:5000",
+      "secure": false,
+      "changeOrigin": true
     },
     "/api/*": {
-      "target": "http://localhost:5000"
+      "target": "http://localhost:5000",
+      "secure": false,
+      "changeOrigin": true
     }
   },
   "dependencies": {
@@ -15,7 +19,7 @@
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
     "html-to-draftjs": "^1.5.0",
-    "materialize-css": "^0.100.2",
+    "materialize-css": "^1.0.0",
     "react": "^16.0.0-alpha.13",
     "react-dom": "^16.0.0-alpha.13",
     "react-draft-wysiwyg": "^1.14.7",

@@ -18,20 +18,20 @@ mongoose.Query.prototype.exec = async function () {
   if (!this.useCache) {
     return exec.apply(this, arguments);
   }
-  console.log("I m about to execute the mongoDB query");
+  //console.log("I m about to execute the mongoDB query");
   const key = JSON.stringify(
     Object.assign({}, this.getQuery(), {
       collection: this.mongooseCollection.name,
     })
   );
-  console.log(key);
+  //console.log(key);
 
   //check whether the cache is readily available
   const cached = await client.hget(this.hashKey, key);
 
   //if cache content available then read from cache
   if (cached) {
-    console.log("Serving from Cache!!!");
+    //console.log("Serving from Cache!!!");
     const doc = JSON.parse(cached);
 
     return Array.isArray(doc)

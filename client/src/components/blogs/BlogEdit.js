@@ -70,9 +70,9 @@ class BlogEdit extends Component {
     let errorsState = this.state.errors;
     let blogContent = this.state.blogContent.trim();
     let blogTitle = this.state.title.trim();
-    console.log("title", blogTitle);
+    //console.log("title", blogTitle);
     //Validation for Title
-    console.log("errorsState.title", errorsState.title);
+    //console.log("errorsState.title", errorsState.title);
 
     errorsState.title =
       blogTitle === "" ? "Blog title should not be empty" : "";
@@ -111,15 +111,15 @@ class BlogEdit extends Component {
         title: blogTitle,
         existingImage: this.state.existingImage,
       };
-      console.log("blog content:", formValues);
+      //console.log("blog content:", formValues);
       updateBlog(formValues, this.state.file, history);
     } else {
-      console.info("Blog content should not be empty!");
+      //console.info("Blog content should not be empty!");
     }
   }
 
   validateForm = (errors) => {
-    console.info("Error:", errors);
+    //console.info("Error:", errors);
     let valid = true;
     Object.values(errors).forEach((val) => val.length > 0 && (valid = false));
     return valid;
@@ -135,7 +135,7 @@ class BlogEdit extends Component {
     });
   }
   getEditorContent = (content) => {
-    console.log(content);
+    //console.log(content);
     this.setState({
       blogContent: content,
       editorTouched: true,

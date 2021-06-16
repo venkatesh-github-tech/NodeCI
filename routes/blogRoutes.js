@@ -40,13 +40,16 @@ module.exports = (app) => {
   });
 
   app.put("/api/blogs", requireLogin, clearCache, async (req, res) => {
+    //console.log(req.body);
     const { id, title, content, imageUrl } = req.body;
+    //console.log(id, title, content, imageUrl);
 
     let blogRecord = await Blog.findOne({ _id: id });
     if (!blogRecord) {
-      console.log("NOT FOUND......");
-      res.send(400, `Record with ${id} not found`);
+      //console.log("NOT FOUND......");
+      res.send(400, `Record with ${id} not found to update`);
     }
+    console.log("blog record", blogRecord);
     try {
       await Blog.updateOne(
         { _id: id },
@@ -54,11 +57,27 @@ module.exports = (app) => {
           $set: {
             title: title,
             content: content,
-            imageUrl: imageUrl === null ? blogRecord.imageUrl : imageUrl,
+            imageUrl: imageUrl === undefined ? blogRecord.imageUrl : imageUrl,
           },
         }
       );
       blogRecord = await Blog.findOne({ _id: id });
+      res.send(blogRecord);
+    } catch (err) {
+      res.status(400).send(err);
+    }
+  });
+
+  app.put("/api/blogDelete", requireLogin, clearCache, async (req, res) => {
+    //console.log(req);
+    const { id } = req.body;
+    let blogRecord = await Blog.findOne({ _id: id });
+    if (!blogRecord) {
+      res.status(400).send(`Record with ${id} not found to delete`);
+    }
+    try {
+      //console.log(blogRecord);
+      await Blog.deleteOne({ _id: id });
       res.send(blogRecord);
     } catch (err) {
       res.status(400).send(err);
